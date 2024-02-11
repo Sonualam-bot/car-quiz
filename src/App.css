@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+
+.correct {
+    background: #dffff2;
+    border-color: #00d397;
+}
+
+.wrong {
+    background: #FFEBEB;
+    border-color: #FF4A4A;
+}
