@@ -1,8 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classicVintageCarsQuiz from "../../utils/data";
 
 function Quiz() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(() => {
+    const storedIndex = localStorage.getItem("quizIndex");
+    return storedIndex ? parseInt(storedIndex, 10) : 0;
+  });
   const [question, setQuestion] = useState(classicVintageCarsQuiz[index]);
   const [lock, setLock] = useState(false);
   const [score, setScore] = useState(0);
@@ -36,14 +39,16 @@ function Quiz() {
         return 0;
       }
 
-      setIndex(index + 1);
-      setQuestion(classicVintageCarsQuiz[index]);
+      localStorage.setItem("quizIndex", index + 1);
+
+      setIndex((prevIndex) => prevIndex + 1);
       setLock(false);
       optionArray.map((option) => {
         option.current.classList.remove("wrong");
         option.current.classList.remove("correct");
         return null;
       });
+      setQuestion(classicVintageCarsQuiz[index + 1]);
     }
   };
 
@@ -54,6 +59,12 @@ function Quiz() {
     setLock(false);
     setResult(false);
   };
+
+  useEffect(() => {
+    if (result) {
+      localStorage.removeItem("quizIndex");
+    }
+  }, [result]);
 
   return (
     <div className=" w-[650px] m-auto bg-white text-[#262626] flex flex-col gap-3 px-[50px] py-[40px] rounded-lg shadow-2xl ">
