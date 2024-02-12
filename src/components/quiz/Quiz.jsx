@@ -68,7 +68,9 @@ function Quiz() {
 
   return (
     <div className=" w-[650px] m-auto bg-white text-[#262626] flex flex-col gap-3 px-[50px] py-[40px] rounded-lg shadow-2xl ">
-      <h1>Quiz App</h1>
+      <h1 className="text-lg tracking-[0.5em] font-extrabold uppercase text-black text-center ">
+        Welcome To The Quiz
+      </h1>
       <hr className="h-[2px] border-none bg-[#707070] " />
       {result ? (
         <></>
